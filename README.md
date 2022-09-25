@@ -1,5 +1,5 @@
 Updates:
-- Added option to filter log lines based on a input string. Case sensitivity option available.
+- Added option to filter log lines based on an input string. Case sensitivity option available.
 <br>
 <h2>Original Readme</h2>
 <hr>
