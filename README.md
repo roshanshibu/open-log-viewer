@@ -1,3 +1,8 @@
+Updates:
+- Added option to filter log lines based on a input string. Case sensitivity option available.
+<br>
+<h2>Original Readme</h2>
+<hr>
 <h1 align="center">
     <img src="./docs/img/logo.png" alt="Open Log Viewer" width="200">
     <br>
