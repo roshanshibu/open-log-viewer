@@ -1,7 +1,7 @@
 Updates:
 - Added option to filter log lines based on an input string. Case sensitivity option available. (More testing needed)
 
-<a href='https://github.com/roshanshibu/open-log-viewer/releases/download/1.6.0/open-log-viewer.exe'>Windows Download</a>
+<a href='https://github.com/roshanshibu/open-log-viewer/releases/download/1.6.0/open-log-viewer_1.6.0.exe'>Windows Download</a>
 <br>
 <h2>Original Readme</h2>
 <hr>
