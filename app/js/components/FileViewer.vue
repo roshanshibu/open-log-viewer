@@ -10,6 +10,9 @@
 			<v-flex xs4>
         		<v-select multiple v-model="logLevelsSelected" :items="logLevels" @change="logLevelsToShowChanged"></v-select>
 			</v-flex>
+			<input v-model="textFilter" placeholder="filter" @change="refreshTail">
+			<input type="checkbox" id="filterCaseCheck" v-model="textFilterCase" @change="refreshTail"/>
+			<label for="filterCaseCheck">Case sensitive</label>
 
 			<v-spacer></v-spacer>
 
@@ -49,6 +52,8 @@
 				toolbarHeight: 40,
 				logLevels: ["Debug", "Info", "Warning", "Error", "Fatal"],
 				logLevelsSelected: this.getLogLevelsToShow(),
+				textFilter: "",
+				textFilterCase: false,
 				height: this.calcHeight(),
 				scrollToEnd: false,
 				currentFileSettings: this.fileSettings
@@ -92,6 +97,11 @@
 			},
 			getLogLevelsToShow() {
 				return this.fileSettings.getLogLevelsToShow().map(severity => this.capitalizeFirstLetter(severity));
+			},
+			refreshTail(){
+				tail.stop();
+				this.clean();
+				this.startTail();
 			},
 			logLevelsToShowChanged() {
 				this.currentFileSettings.setLogLevelsToShow(this.logLevelsSelected);
@@ -141,6 +151,16 @@
 						// to a better layout
 						if (line.line === "") {
 							line.line = " ";
+						}
+
+						let filterCaseSensitivity = "i";
+						if (this.textFilterCase){
+							filterCaseSensitivity = "g"
+						}
+						if (this.textFilter !== "" && 
+							line.line.search(RegExp(this.textFilter.replace(/(?=[\[() \]?])/g, '\\'), filterCaseSensitivity)) == -1)
+						{
+							return;
 						}
 
 						const position = {
